@@ -1,0 +1,23 @@
+# Simple deployment used to deploy and manage the app 
+kind: Deployment
+metadata:
+  name: web-deploy
+  labels:
+    app: web
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec: 
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: hello-pod
+        image: giacinto69/kubedemo:appv1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
